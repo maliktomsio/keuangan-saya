@@ -5,13 +5,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Budggt Lite</title>
 
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css">
+<style>
+:root{
+  --bg:#0e1621;
+  --card:#111827;
+  --primary:#3b82f6;
+  --text:#fff;
+}
 
-<!-- Fix iOS PWA -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Budggt Lite">
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,system-ui;
+  margin:0;
+}
+
+.app{
+  max-width:420px;
+  margin:auto;
+  padding:14px;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.saldo{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  text-align:center;
+}
+
+#saldo{
+  font-size:26px;
+  font-weight:bold;
+  margin-top:6px;
+}
+
+input,select,button{
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border-radius:12px;
+  border:none;
+}
+
+.primary{
+  background:var(--primary);
+  color:white;
+  font-weight:bold;
+}
+
+.item{
+  background:var(--card);
+  padding:12px;
+  margin:8px 0;
+  border-radius:12px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.masuk{border-left:4px solid #22c55e}
+.keluar{border-left:4px solid #ef4444}
+
+.hapus{
+  font-size:12px;
+  margin-top:4px;
+  color:#ff6b6b;
+}
+</style>
+
 </head>
 
 <body>
@@ -20,7 +89,6 @@
 
 <header>
 <h2>Budggt Lite</h2>
-<button id="btnInstall" class="install">Install App</button>
 </header>
 
 <section class="saldo">
@@ -46,6 +114,80 @@
 
 </div>
 
-<script src="app.js"></script>
+<script>
+// ===== DATABASE =====
+let db = JSON.parse(localStorage.getItem("budggt")) || []
+
+function format(n){
+  return "Rp " + Number(n).toLocaleString("id-ID")
+}
+
+// ===== RENDER =====
+function render(){
+
+  let list = document.getElementById("list")
+  let saldo = 0
+  list.innerHTML = ""
+
+  db.forEach((x,i)=>{
+
+    saldo += x.tipe=="masuk" ? x.jumlah : -x.jumlah
+
+    list.innerHTML += `
+    <div class="item ${x.tipe}">
+      <div>
+        <div>${x.nama}</div>
+        <div style="font-size:11px">${x.tipe}</div>
+      </div>
+
+      <div style="text-align:right">
+        <div>${format(x.jumlah)}</div>
+        <div class="hapus" onclick="hapus(${i})">hapus</div>
+      </div>
+    </div>`
+  })
+
+  document.getElementById("saldo").innerText = format(saldo)
+
+  localStorage.setItem("budggt", JSON.stringify(db))
+}
+
+// ===== TAMBAH =====
+function tambah(){
+
+  let nama = document.getElementById("nama").value
+  let jumlah = Number(document.getElementById("jumlah").value)
+  let tipe = document.getElementById("tipe").value
+
+  if(!nama || !jumlah){
+    alert("Isi dulu datanya Malik 😉")
+    return
+  }
+
+  db.unshift({
+    nama: nama,
+    jumlah: jumlah,
+    tipe: tipe,
+    tgl: new Date().toISOString()
+  })
+
+  render()
+
+  document.getElementById("nama").value = ""
+  document.getElementById("jumlah").value = ""
+}
+
+// ===== HAPUS =====
+function hapus(i){
+  if(confirm("Hapus transaksi?")){
+    db.splice(i,1)
+    render()
+  }
+}
+
+// pertama kali
+render()
+</script>
+
 </body>
 </html>
