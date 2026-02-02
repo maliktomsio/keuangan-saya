@@ -1,8 +1,9 @@
 {
-"name":"Keuangan Saya",
-"short_name":"Keuangan",
-"start_url":"index.html",
+"name":"Budggt Lite",
+"short_name":"Budggt",
+"start_url":"/index.html",
 "display":"standalone",
-"background_color":"#0f172a",
-"theme_color":"#0f172a"
+"background_color":"#0e1621",
+"theme_color":"#0e1621",
+"icons":[]
 }
