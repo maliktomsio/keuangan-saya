@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keuangan Pribadi</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+<h2>💰 Keuangan Saya</h2>
+
+<div class="card">
+<h3>Saldo</h3>
+<div id="saldo">Rp 0</div>
+</div>
+
+<div class="row">
+<input id="nama" placeholder="Keterangan">
+<input id="jumlah" type="number" placeholder="Nominal">
+<select id="tipe">
+<option value="masuk">Pemasukan</option>
+<option value="keluar">Pengeluaran</option>
+</select>
+<button onclick="tambah()">Simpan</button>
+</div>
+
+<h3>Transaksi</h3>
+<div id="list"></div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
