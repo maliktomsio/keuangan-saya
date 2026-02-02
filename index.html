@@ -1,36 +1,48 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Keuangan Pribadi</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Budggt Lite</title>
 
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
+
+<!-- Fix iOS PWA -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Budggt Lite">
 </head>
 
 <body>
 
 <div class="app">
-<h2>💰 Keuangan Saya</h2>
 
-<div class="card">
-<h3>Saldo</h3>
+<header>
+<h2>Budggt Lite</h2>
+<button id="btnInstall" class="install">Install App</button>
+</header>
+
+<section class="saldo">
+<div>Total Saldo</div>
 <div id="saldo">Rp 0</div>
-</div>
+</section>
 
-<div class="row">
-<input id="nama" placeholder="Keterangan">
+<section class="form">
+<input id="nama" placeholder="Keterangan transaksi">
 <input id="jumlah" type="number" placeholder="Nominal">
 <select id="tipe">
 <option value="masuk">Pemasukan</option>
 <option value="keluar">Pengeluaran</option>
 </select>
-<button onclick="tambah()">Simpan</button>
-</div>
 
-<h3>Transaksi</h3>
+<button class="primary" onclick="tambah()">Simpan</button>
+</section>
+
+<section>
+<h3>Riwayat</h3>
 <div id="list"></div>
+</section>
 
 </div>
 
