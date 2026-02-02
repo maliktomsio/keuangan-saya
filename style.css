@@ -1,41 +1,74 @@
+:root{
+--bg:#0e1621;
+--card:#111827;
+--primary:#3b82f6;
+--text:#fff;
+}
+
 body{
-background:#0f172a;
-color:white;
-font-family:system-ui;
+background:var(--bg);
+color:var(--text);
+font-family:-apple-system,system-ui;
 margin:0;
 }
 
 .app{
 max-width:420px;
 margin:auto;
-padding:15px;
+padding:14px;
 }
 
-.card{
-background:#111827;
-padding:12px;
-border-radius:12px;
-margin-bottom:10px;
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.saldo{
+background:var(--card);
+padding:14px;
+border-radius:14px;
+margin:10px 0;
+text-align:center;
+}
+
+#saldo{
+font-size:26px;
+font-weight:bold;
+margin-top:6px;
 }
 
 input,select,button{
 width:100%;
-margin:5px 0;
-padding:10px;
-border-radius:8px;
+padding:12px;
+margin:6px 0;
+border-radius:12px;
 border:none;
 }
 
-button{
-background:#2563eb;
+.primary{
+background:var(--primary);
 color:white;
+font-weight:bold;
 }
 
 .item{
-background:#1f2937;
-padding:10px;
-margin:6px 0;
-border-radius:8px;
+background:var(--card);
+padding:12px;
+margin:8px 0;
+border-radius:12px;
+
 display:flex;
 justify-content:space-between;
+align-items:center;
+}
+
+.masuk{border-left:4px solid #22c55e}
+.keluar{border-left:4px solid #ef4444}
+
+.install{
+background:#1f2937;
+color:white;
+padding:6px 10px;
+width:auto;
 }
